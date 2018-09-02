@@ -26,19 +26,22 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   SocketIO socketIO;
-  String forward = "false";
-  String backward = "false";
-  String left = "false";
-  String right = "false";
+  bool forward = false;
+  bool backward = false;
+  bool left = false;
+  bool right = false;
+  String moveFlutter;
 
   _connectSocket() {
     socketIO = new SocketIO("http://192.168.1.216:8080", "/");
     socketIO.init();
     socketIO.connect();
   }
-  timerSend() {
-    return new Timer.periodic(Duration(seconds:3), (Timer t) {
-      String moveFlutter = '{forward:'+forward.toString()+',backward:'+backward.toString()+',left:'+left.toString()+',right:'+right.toString()+'}';
+  MyHomePageState(){
+    new Timer.periodic(Duration(seconds:3), (Timer t) {
+      setState(() {
+        moveFlutter = '{forward:'+forward.toString()+',backward:'+backward.toString()+',left:'+left.toString()+',right:'+right.toString()+'}';
+      });
       socketIO.sendMessage("event", moveFlutter);
     });
   }
@@ -46,7 +49,6 @@ class MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _connectSocket();
-    timerSend();
   }
   @override
   Widget build(BuildContext context) {

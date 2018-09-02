@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MoveButton extends StatefulWidget {
   MoveButton({Key key, this.move, this.width, this.height, this.border, this.pos}) : super(key: key);
-  final String move;
+  final bool move;
   final double width;
   final double height;
   final double border;
@@ -17,17 +17,17 @@ class MoveButtonState extends State<MoveButton> {
   Color _releaseColor = Color(0xFF00818a);
   Color _colorNow = Color(0xFF00818a);
 
-  _holdB(String move){
+  _holdB(bool move){
     setState(() {
       _colorNow = _holdColor;
-      move = "true";
+      move = true;
     });
   }
 
-  _releaseB(String move){
+  _releaseB(bool move){
     setState(() {
       _colorNow = _releaseColor;
-      move = "false";
+      move = false;
     });
   }
 
