@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MoveButton extends StatefulWidget {
   MoveButton({Key key, this.move, this.width, this.height, this.border, this.pos}) : super(key: key);
-  final bool move;
+  bool move;
   final double width;
   final double height;
   final double border;
@@ -17,25 +17,25 @@ class MoveButtonState extends State<MoveButton> {
   Color _releaseColor = Color(0xFF00818a);
   Color _colorNow = Color(0xFF00818a);
 
-  _holdB(bool move){
+  _holdB(){
     setState(() {
       _colorNow = _holdColor;
-      move = true;
+      widget.move = true;
     });
   }
 
-  _releaseB(bool move){
+  _releaseB(){
     setState(() {
       _colorNow = _releaseColor;
-      move = false;
+      widget.move = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      onTapDown: (_) => _holdB(widget.move),
-      onTapUp: (_) => _releaseB(widget.move),
+      onTapDown: (_) => _holdB(),
+      onTapUp: (_) => _releaseB(),
       child: new Container(
         decoration: new BoxDecoration(
           color: _colorNow,

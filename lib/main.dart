@@ -23,14 +23,14 @@ class MyHomePage extends StatefulWidget {
   @override
   MyHomePageState createState() => new MyHomePageState();
 }
-
+  
 class MyHomePageState extends State<MyHomePage> {
   SocketIO socketIO;
+  String moveFlutter;
   bool forward = false;
   bool backward = false;
   bool left = false;
   bool right = false;
-  String moveFlutter;
 
   _connectSocket() {
     socketIO = new SocketIO("http://192.168.1.216:8080", "/");
